@@ -1,0 +1,104 @@
+{
+  "rus": [
+    {
+      "id": 0,
+      "src_cty": "rus",
+      "dest_lat": 40.922293,
+      "dest_lon": 264.333774,
+      "src_lat": 53.522259,
+      "src_lon": 158.112477
+    },
+    {
+      "id": 1,
+      "src_cty": "rus",
+      "dest_lat": 38.968443,
+      "dest_lon": 266.301203,
+      "src_lat": 53.522259,
+      "src_lon": 158.112477
+    },
+    {
+      "id": 2,
+      "src_cty": "rus",
+      "dest_lat": 47.589563,
+      "dest_lon": 248.856131,
+      "src_lat": 53.522259,
+      "src_lon": 158.112477
+    },
+    {
+      "id": 3,
+      "src_cty": "rus",
+      "dest_lat": 32.556607,
+      "dest_lon": 266.268632,
+      "src_lat": 53.522259,
+      "src_lon": 158.112477
+    },
+    {
+      "id": 10,
+      "src_cty": "rus",
+      "dest_lat": 19.480263,
+      "dest_lon": 204.504562,
+      "src_lat": 53.522259,
+      "src_lon": 158.112477
+    }
+  ],
+  "chn": [
+    {
+      "id": 4,
+      "src_cty": "chn",
+      "dest_lat": 33.232265,
+      "dest_lon": 242.787957,
+      "src_lat": 30.171607,
+      "src_lon": 118.268712
+    },
+    {
+      "id": 5,
+      "src_cty": "chn",
+      "dest_lat": 41.127029,
+      "dest_lon": 254.836601,
+      "src_lat": 30.171607,
+      "src_lon": 118.268712
+    },
+    {
+      "id": 6,
+      "src_cty": "chn",
+      "dest_lat": 47.589563,
+      "dest_lon": 248.856131,
+      "src_lat": 30.171607,
+      "src_lon": 118.268712
+    },
+    {
+      "id": 7,
+      "src_cty": "chn",
+      "dest_lat": 48.397297,
+      "dest_lon": 259.299811,
+      "src_lat": 30.171607,
+      "src_lon": 118.268712
+    },
+    {
+      "id": 11,
+      "src_cty": "chn",
+      "dest_lat": 19.480263,
+      "dest_lon": 204.504562,
+      "src_lat": 30.171607,
+      "src_lon": 118.268712
+    }
+  ],
+  "nke": [
+    {
+      "id": 8,
+      "src_cty": "nke",
+      "dest_lat": 41.127029,
+      "dest_lon": 254.836601,
+      "src_lat": 38.326335,
+      "src_lon": 125.492302
+    },
+    {
+      "id": 9,
+      "src_cty": "nke",
+      "dest_lat": 19.480263,
+      "dest_lon": 204.504562,
+      "src_lat": 38.326335,
+      "src_lon": 125.492302
+    }
+  ]
+}
