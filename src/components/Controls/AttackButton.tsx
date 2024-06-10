@@ -6,7 +6,7 @@ const AttackButton = ({ country, text }: { country: string; text: string }) => {
   return (
     <div className="my-2">
       <button
-        className="hover:bg-gray-700 py-2 px-4 w-full border rounded"
+        className="btn-primary w-full"
         onClick={() => addAggressor(country)}
       >
         {text}

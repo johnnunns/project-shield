@@ -6,16 +6,19 @@ import Defenses from './Defenses';
 
 const MapContainer = () => {
   return (
-    <div className="flex-1 border-r-2 border-white relative">
+    <div
+      id="world-container"
+      className="flex-1 border-r-2 border-white relative"
+    >
       <Canvas>
         <PerspectiveCamera
           makeDefault
           fov={60}
           zoom={3.5}
-          position={[-6, 20, 25]}
+          position={[-25, 20, 25]}
         />
         <ambientLight intensity={1} />
-        <OrbitControls minDistance={1} maxDistance={12} />
+        <OrbitControls minDistance={1} maxDistance={13} />
         <Map />
         <Projectiles />
         <Defenses />

@@ -1,0 +1,35 @@
+{
+  "ak": {
+    "id": 0,
+    "name": "Alaska",
+    "lat": 62.931099,
+    "lon": 209.582551,
+    "is_active": true,
+    "count": 20,
+    "threats_neutralized": 0,
+    "threats_missed": 0,
+    "capacity": 20
+  },
+  "ca": {
+    "id": 1,
+    "name": "California",
+    "lat": 40.997778,
+    "lon": 240.217695,
+    "is_active": true,
+    "count": 500,
+    "threats_neutralized": 0,
+    "threats_missed": 0,
+    "capacity": 500
+  },
+  "hi": {
+    "id": 2,
+    "name": "Hawaii",
+    "lat": 21.492047,
+    "lon": 202.287887,
+    "is_active": true,
+    "count": 20,
+    "threats_neutralized": 0,
+    "threats_missed": 0,
+    "capacity": 20
+  }
+}

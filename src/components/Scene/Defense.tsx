@@ -1,15 +1,27 @@
 import { DEFENSE_RADIUS } from '../../helpers/constants';
-import { DefenseData } from '../../types';
+import { useMapController } from '../../hooks/useMapController';
+import { DefenseProps } from '../../types';
 
-const Defense = ({ position, isActive }: DefenseData) => {
+const Defense = ({ defense }: DefenseProps) => {
+  const { setSelectedHangar } = useMapController();
+  const { is_active, count, position } = defense;
+
+  const color = is_active ? (count > 5 ? '#7FFF7F' : 'orange') : 'red';
+  const el = document.querySelector('#world-container') as HTMLElement;
+
   return (
-    <mesh position={position}>
+    <mesh
+      position={position}
+      onPointerEnter={() => {
+        el.style.cursor = 'pointer';
+      }}
+      onPointerLeave={() => {
+        el.style.cursor = 'default';
+      }}
+      onClick={() => setSelectedHangar(defense.id)}
+    >
       <sphereGeometry args={[DEFENSE_RADIUS, 32, 32]} />
-      <meshStandardMaterial
-        color={isActive ? '#7FFF7F' : 'red'}
-        opacity={0.5}
-        transparent
-      />
+      <meshStandardMaterial color={color} opacity={0.5} transparent />
     </mesh>
   );
 };

@@ -1,8 +1,8 @@
 import { useEffect } from 'react';
-import data from '../../data/attack-coordinates.json';
 import Projectile from './Projectile';
 import { useMapController } from '../../hooks/useMapController';
 import { AggressorCountryData, ProjectileLocationData } from '../../types';
+import data from '../../data/attack-coordinates.json';
 
 const Aggressor: AggressorCountryData = data;
 
@@ -21,7 +21,11 @@ const Projectiles = () => {
 
       aggressorCoords.forEach((coord) => {
         if (!projectiles.find((p) => p.id === coord.id)) {
-          addProjectile({ ...coord, start_time: performance.now() / 1000 });
+          addProjectile({
+            ...coord,
+            start_time: performance.now() / 1000,
+            tracked: false,
+          });
         }
       });
     };

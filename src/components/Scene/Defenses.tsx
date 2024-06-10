@@ -6,9 +6,9 @@ const Defenses = () => {
 
   return (
     <>
-      {defenses.map((defense) => (
-        <Defense key={defense.id} {...defense} />
-      ))}
+      {defenses.map((defense) => {
+        return <Defense key={defense.id} defense={defense} />;
+      })}
     </>
   );
 };

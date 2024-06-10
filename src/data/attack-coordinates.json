@@ -4,7 +4,7 @@
       "id": 0,
       "src_cty": "rus",
       "dest_lat": 40.922293,
-      "dest_lon": 264.333774,
+      "dest_lon": 265.333774,
       "src_lat": 53.522259,
       "src_lon": 158.112477
     },
@@ -12,7 +12,7 @@
       "id": 1,
       "src_cty": "rus",
       "dest_lat": 38.968443,
-      "dest_lon": 266.301203,
+      "dest_lon": 267.301203,
       "src_lat": 53.522259,
       "src_lon": 158.112477
     },
@@ -20,7 +20,7 @@
       "id": 2,
       "src_cty": "rus",
       "dest_lat": 47.589563,
-      "dest_lon": 248.856131,
+      "dest_lon": 249.856131,
       "src_lat": 53.522259,
       "src_lon": 158.112477
     },
@@ -28,7 +28,7 @@
       "id": 3,
       "src_cty": "rus",
       "dest_lat": 32.556607,
-      "dest_lon": 266.268632,
+      "dest_lon": 267.268632,
       "src_lat": 53.522259,
       "src_lon": 158.112477
     },
@@ -36,7 +36,31 @@
       "id": 10,
       "src_cty": "rus",
       "dest_lat": 19.480263,
-      "dest_lon": 204.504562,
+      "dest_lon": 205.504562,
+      "src_lat": 53.522259,
+      "src_lon": 158.112477
+    },
+    {
+      "id": 12,
+      "src_cty": "rus",
+      "dest_lat": 42.922293,
+      "dest_lon": 266.333774,
+      "src_lat": 53.522259,
+      "src_lon": 158.112477
+    },
+    {
+      "id": 13,
+      "src_cty": "rus",
+      "dest_lat": 39.968443,
+      "dest_lon": 268.301203,
+      "src_lat": 53.522259,
+      "src_lon": 158.112477
+    },
+    {
+      "id": 14,
+      "src_cty": "rus",
+      "dest_lat": 48.589563,
+      "dest_lon": 250.856131,
       "src_lat": 53.522259,
       "src_lon": 158.112477
     }
@@ -46,7 +70,7 @@
       "id": 4,
       "src_cty": "chn",
       "dest_lat": 33.232265,
-      "dest_lon": 242.787957,
+      "dest_lon": 243.787957,
       "src_lat": 30.171607,
       "src_lon": 118.268712
     },
@@ -54,7 +78,7 @@
       "id": 5,
       "src_cty": "chn",
       "dest_lat": 41.127029,
-      "dest_lon": 254.836601,
+      "dest_lon": 255.836601,
       "src_lat": 30.171607,
       "src_lon": 118.268712
     },
@@ -62,7 +86,7 @@
       "id": 6,
       "src_cty": "chn",
       "dest_lat": 47.589563,
-      "dest_lon": 248.856131,
+      "dest_lon": 249.856131,
       "src_lat": 30.171607,
       "src_lon": 118.268712
     },
@@ -70,7 +94,7 @@
       "id": 7,
       "src_cty": "chn",
       "dest_lat": 48.397297,
-      "dest_lon": 259.299811,
+      "dest_lon": 260.299811,
       "src_lat": 30.171607,
       "src_lon": 118.268712
     },
@@ -78,7 +102,31 @@
       "id": 11,
       "src_cty": "chn",
       "dest_lat": 19.480263,
-      "dest_lon": 204.504562,
+      "dest_lon": 205.504562,
+      "src_lat": 30.171607,
+      "src_lon": 118.268712
+    },
+    {
+      "id": 15,
+      "src_cty": "chn",
+      "dest_lat": 34.232265,
+      "dest_lon": 244.787957,
+      "src_lat": 30.171607,
+      "src_lon": 118.268712
+    },
+    {
+      "id": 16,
+      "src_cty": "chn",
+      "dest_lat": 42.127029,
+      "dest_lon": 256.836601,
+      "src_lat": 30.171607,
+      "src_lon": 118.268712
+    },
+    {
+      "id": 17,
+      "src_cty": "chn",
+      "dest_lat": 48.589563,
+      "dest_lon": 250.856131,
       "src_lat": 30.171607,
       "src_lon": 118.268712
     }
@@ -87,16 +135,32 @@
     {
       "id": 8,
       "src_cty": "nke",
-      "dest_lat": 41.127029,
-      "dest_lon": 254.836601,
+      "dest_lat": 42.127029,
+      "dest_lon": 255.836601,
       "src_lat": 38.326335,
       "src_lon": 125.492302
     },
     {
       "id": 9,
       "src_cty": "nke",
-      "dest_lat": 19.480263,
-      "dest_lon": 204.504562,
+      "dest_lat": 20.480263,
+      "dest_lon": 205.504562,
+      "src_lat": 38.326335,
+      "src_lon": 125.492302
+    },
+    {
+      "id": 18,
+      "src_cty": "nke",
+      "dest_lat": 43.127029,
+      "dest_lon": 256.836601,
+      "src_lat": 38.326335,
+      "src_lon": 125.492302
+    },
+    {
+      "id": 19,
+      "src_cty": "nke",
+      "dest_lat": 21.480263,
+      "dest_lon": 206.504562,
       "src_lat": 38.326335,
       "src_lon": 125.492302
     }
