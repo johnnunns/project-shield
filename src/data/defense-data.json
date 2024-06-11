@@ -1,6 +1,6 @@
 {
   "ak": {
-    "id": 0,
+    "id": "ak",
     "name": "Alaska",
     "lat": 62.931099,
     "lon": 209.582551,
@@ -11,7 +11,7 @@
     "capacity": 20
   },
   "ca": {
-    "id": 1,
+    "id": "ca",
     "name": "California",
     "lat": 40.997778,
     "lon": 240.217695,
@@ -22,7 +22,7 @@
     "capacity": 500
   },
   "hi": {
-    "id": 2,
+    "id": "hi",
     "name": "Hawaii",
     "lat": 21.492047,
     "lon": 202.287887,

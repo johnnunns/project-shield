@@ -5,10 +5,16 @@ import {
   MapControllerContextType,
   DefenseData,
   InterceptorCountAction,
+  HangarRequestType,
 } from '../types';
 import data from '../data/defense-data.json';
 import { latLonToVector3 } from '../helpers/getSplineFromCoords';
-import { DEFENSE_RADIUS, GLOBE_RADIUS } from '../helpers/constants';
+import {
+  DEFAULT_ZOOM,
+  DEFENSE_RADIUS,
+  GLOBE_RADIUS,
+} from '../helpers/constants';
+import { Vector3 } from '@react-three/fiber';
 
 export const MapControllerContext = createContext<
   MapControllerContextType | undefined
@@ -23,20 +29,29 @@ const initDefenseData = Object.values(data).map((defense) => ({
   ),
 }));
 
+export const DEFAULT_CAMERA_VECTOR = latLonToVector3(32, 220, DEFAULT_ZOOM);
+
 export const MapControllerProvider: React.FC<{ children: ReactNode }> = ({
   children,
 }) => {
+  const [cameraPosition] = useState<Vector3>(DEFAULT_CAMERA_VECTOR);
+  const [targetPosition, setTargetPosition] = useState<Vector3>(
+    DEFAULT_CAMERA_VECTOR
+  );
+  const [autoRotating, setAutoRotating] = useState(false);
   const [aggressors, setAggressors] = useState<AggressorsType>([]);
+  const [hangarsRequestingReinforcements, setHangarsRequestingReinforcements] =
+    useState<HangarRequestType>([]);
   const [projectiles, setProjectiles] = useState<ProjectileLocationData[]>([]);
   const [defenses, setDefenses] = useState<DefenseData[]>(initDefenseData);
   const [catastrophicEventCount, setCatastrophicEventCount] = useState(0);
-  const [selectedHangar, setSelectedHangar] = useState<number | null>(null);
+  const [selectedHangar, setSelectedHangar] = useState<string>('');
 
   const addProjectile = (projectile: ProjectileLocationData) => {
     setProjectiles((prev) => [...prev, projectile]);
   };
 
-  const removeProjectile = (id: number) => {
+  const removeProjectile = (id: number | string) => {
     setProjectiles((prev) => prev.filter((p) => p.id !== id));
   };
 
@@ -55,7 +70,13 @@ export const MapControllerProvider: React.FC<{ children: ReactNode }> = ({
     setAggressors(aggressors.filter((agg) => agg !== country));
   };
 
-  const toggleDefenseActive = (id: number) => {
+  const removeHangarRequest = (id: string) => {
+    setHangarsRequestingReinforcements(
+      hangarsRequestingReinforcements.filter((a) => a !== id)
+    );
+  };
+
+  const toggleDefenseActive = (id: string) => {
     setDefenses((prevDefenses) =>
       prevDefenses.map((defense) =>
         defense.id === id
@@ -66,26 +87,25 @@ export const MapControllerProvider: React.FC<{ children: ReactNode }> = ({
   };
 
   const updateInterceptorCount = (
-    id: number,
-    action: InterceptorCountAction
+    id: string,
+    action: InterceptorCountAction,
+    removeCount?: number
   ) => {
-    let operator;
-    switch (action) {
-      case InterceptorCountAction.ADD:
-        operator = '+';
-        break;
-      case InterceptorCountAction.REMOVE:
-      case InterceptorCountAction.DEFEND_THREAT:
-        operator = '-';
-        break;
-      default:
-    }
-
-    if (!operator) return;
-
     setDefenses((prevDefenses) =>
       prevDefenses.map((defense) => {
-        const count = eval(defense.count + operator + 1);
+        let count = defense.count;
+        switch (action) {
+          case InterceptorCountAction.DEFEND_THREAT:
+            count = defense.count - 1;
+            break;
+          case InterceptorCountAction.REMOVE:
+            count = defense.count - (removeCount || 0);
+            break;
+          case InterceptorCountAction.REINFORCE:
+            count = defense.capacity;
+            break;
+          default:
+        }
         return defense.id === id
           ? {
               ...defense,
@@ -101,7 +121,7 @@ export const MapControllerProvider: React.FC<{ children: ReactNode }> = ({
     );
   };
 
-  const addThreatsMissed = (id: number) => {
+  const addThreatsMissed = (id: string) => {
     setDefenses((prevDefenses) =>
       prevDefenses.map((defense) => {
         return defense.id === id
@@ -114,9 +134,25 @@ export const MapControllerProvider: React.FC<{ children: ReactNode }> = ({
     );
   };
 
+  const updateSelectedHangar = (id: string, lat?: number, lon?: number) => {
+    setSelectedHangar(id);
+    setAutoRotating(true);
+
+    if (id && lat && lon) {
+      const newPosition = latLonToVector3(lat, lon, GLOBE_RADIUS + 10);
+      setTargetPosition(newPosition);
+    } else {
+      setTargetPosition(DEFAULT_CAMERA_VECTOR);
+    }
+  };
+
   return (
     <MapControllerContext.Provider
       value={{
+        autoRotating,
+        setAutoRotating,
+        cameraPosition,
+        targetPosition,
         aggressors,
         addAggressor,
         removeAggressor,
@@ -130,7 +166,10 @@ export const MapControllerProvider: React.FC<{ children: ReactNode }> = ({
         catastrophicEventCount,
         setCatastrophicEventCount,
         selectedHangar,
-        setSelectedHangar,
+        updateSelectedHangar,
+        hangarsRequestingReinforcements,
+        setHangarsRequestingReinforcements,
+        removeHangarRequest,
       }}
     >
       {children}

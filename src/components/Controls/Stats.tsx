@@ -19,18 +19,18 @@ const Stats = () => {
 
   return (
     <Accordion title="Statistics">
-      <div className="text-left mt-2">
+      <div className="text-left mt-2 gap-2 flex flex-col p-1">
         <p>
-          <b>Total Interceptors:</b> {defenseCounts.inventory}
-        </p>
-        <p>
-          <b>Current Threats:</b> {projectiles.length}
+          <b>Active Threats:</b> {projectiles.length}
         </p>
         <p>
           <b>Threats Neutralized:</b> {defenseCounts.neutralized}
         </p>
         <p>
           <b>Catastrophic Events:</b> {catastrophicEventCount}
+        </p>
+        <p>
+          <b>Total Interceptors Available:</b> {defenseCounts.inventory}
         </p>
       </div>
     </Accordion>

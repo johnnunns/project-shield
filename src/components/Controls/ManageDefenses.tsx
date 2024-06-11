@@ -4,7 +4,7 @@ import { useMapController } from '../../hooks/useMapController';
 import { faCircleExclamation } from '@fortawesome/free-solid-svg-icons';
 
 const ManageDefenses = () => {
-  const { defenses, setSelectedHangar } = useMapController();
+  const { defenses, updateSelectedHangar } = useMapController();
 
   return (
     <Accordion title="Manage Defenses">
@@ -20,7 +20,7 @@ const ManageDefenses = () => {
                   : 'text-red-500'
               }`}
               role="button"
-              onClick={() => setSelectedHangar(d.id)}
+              onClick={() => updateSelectedHangar(d.id, d.lat, d.lon)}
             >
               {d.name}
               {d.count < 5 && (

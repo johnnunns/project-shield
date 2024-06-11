@@ -1,26 +1,38 @@
+import { Vector3 } from '@react-three/fiber';
 import { ReactNode } from 'react';
 import { Dispatch, SetStateAction } from 'react';
 import * as THREE from 'three';
 
 export interface MapControllerContextType {
+  cameraPosition: Vector3;
+  targetPosition: Vector3;
+  autoRotating: boolean;
+  setAutoRotating: Dispatch<SetStateAction<boolean>>;
   addAggressor: (aggressor: string) => void;
   removeAggressor: (aggressor: string) => void;
   aggressors: AggressorsType;
   projectiles: ProjectileLocationData[];
   addProjectile: (projectile: ProjectileLocationData) => void;
-  removeProjectile: (id: number) => void;
+  removeProjectile: (id: number | string) => void;
   defenses: DefenseData[];
-  toggleDefenseActive: (id: number) => void;
-  updateInterceptorCount: (id: number, action: InterceptorCountAction) => void;
-  addThreatsMissed: (id: number, coordsId: number) => void;
+  toggleDefenseActive: (id: string) => void;
+  updateInterceptorCount: (
+    id: string,
+    action: InterceptorCountAction,
+    removeCount?: number
+  ) => void;
+  addThreatsMissed: (id: string, coordsId: string | number) => void;
   catastrophicEventCount: number;
   setCatastrophicEventCount: Dispatch<SetStateAction<number>>;
-  selectedHangar: number | null;
-  setSelectedHangar: Dispatch<SetStateAction<number | null>>;
+  selectedHangar: string;
+  updateSelectedHangar: (id: string, lat?: number, lon?: number) => void;
+  setHangarsRequestingReinforcements: Dispatch<SetStateAction<string[]>>;
+  hangarsRequestingReinforcements: HangarRequestType;
+  removeHangarRequest: (id: string) => void;
 }
 
 export enum InterceptorCountAction {
-  ADD,
+  REINFORCE,
   REMOVE,
   DEFEND_THREAT,
 }
@@ -31,7 +43,7 @@ export interface LatLongs {
 }
 
 export interface DefenseData {
-  id: number;
+  id: string;
   position: THREE.Vector3;
   is_active: boolean;
   name: string;
@@ -40,6 +52,7 @@ export interface DefenseData {
   threats_missed: number;
   lat: number;
   lon: number;
+  capacity: number;
 }
 
 export interface DefenseProps {
@@ -47,12 +60,17 @@ export interface DefenseProps {
 }
 
 export interface ProjectileProps {
-  coords: ProjectileLocationData;
+  projectileData: ProjectileLocationData;
   startTime: number;
+  type: string;
+}
+
+export interface TotalCapacityProps {
+  hangarDetails: DefenseData;
 }
 
 export interface ProjectileLocationData {
-  id: number;
+  id: string | number;
   dest_lat: number;
   dest_lon: number;
   src_lat: number;
@@ -60,6 +78,11 @@ export interface ProjectileLocationData {
   src_cty: string;
   start_time?: number;
   tracked?: boolean;
+  type?: string;
+}
+
+export interface HangarData {
+  [key: string]: DefenseData;
 }
 
 export interface AggressorCountryData {
@@ -68,8 +91,10 @@ export interface AggressorCountryData {
 
 export type AggressorsType = string[];
 
+export type HangarRequestType = string[];
+
 export interface InterceptorDepotData {
-  id: number;
+  id: string;
   lat: number;
   lon: number;
   is_active: boolean;

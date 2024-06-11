@@ -9,7 +9,7 @@ const Controllers = () => {
 
   return (
     <div className="min-w-80 text-center flex flex-col">
-      {typeof selectedHangar === 'number' ? (
+      {selectedHangar ? (
         <HangarDetails />
       ) : (
         <>

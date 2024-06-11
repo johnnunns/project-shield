@@ -13,7 +13,7 @@ const t = {
   ) => JSX.Element,
 };
 
-const Projectile = ({ coords, startTime }: ProjectileProps) => {
+const Projectile = ({ projectileData, startTime, type }: ProjectileProps) => {
   const meshRef = useRef<THREE.Mesh>(null);
   const lineRef = useRef<THREE.Line>(null);
   const {
@@ -23,16 +23,16 @@ const Projectile = ({ coords, startTime }: ProjectileProps) => {
     updateInterceptorCount,
     setCatastrophicEventCount,
     addThreatsMissed,
+    removeHangarRequest,
   } = useMapController();
 
-  const { spline, end } = getSplineFromCoords(coords);
+  const { spline, end } = getSplineFromCoords(projectileData);
   const points = spline.getPoints(100);
   const geometry = new THREE.BufferGeometry().setFromPoints(points);
   geometry.setDrawRange(0, 0);
   const maxRange = CURVE_SEGMENTS * 3;
 
   useEffect(() => {
-    // Ensure the geometry and material are set correctly
     if (lineRef.current) {
       lineRef.current.geometry = geometry;
     }
@@ -48,34 +48,44 @@ const Projectile = ({ coords, startTime }: ProjectileProps) => {
 
       const point = spline.getPointAt(t);
       meshRef.current.position.set(point.x, point.y, point.z);
-      const destructionEvent =
+
+      const reachedDestination =
         Math.abs(end.x - point.x) < 0.01 &&
         Math.abs(end.y - point.y) < 0.01 &&
         Math.abs(end.z - point.z) < 0.01;
 
-      if (destructionEvent) {
-        removeAggressor(coords.src_cty);
-        removeProjectile(coords.id);
+      if (type === 'attack' && reachedDestination) {
+        removeAggressor(projectileData.src_cty);
+        removeProjectile(Number(projectileData.id));
         setCatastrophicEventCount((prevCount) => prevCount + 1);
+      } else if (type === 'reinforcements' && reachedDestination) {
+        removeHangarRequest(projectileData.id.toString());
+        removeProjectile(projectileData.id);
+        updateInterceptorCount(
+          projectileData.id.toString(),
+          InterceptorCountAction.REINFORCE
+        );
       }
 
-      defenses.forEach((defense) => {
-        const distance = point.distanceTo(defense.position);
-        const radiusInWorldUnits = DEFENSE_RADIUS;
-        if (distance < radiusInWorldUnits) {
-          if (defense.is_active) {
-            removeAggressor(coords.src_cty);
-            removeProjectile(coords.id);
-            updateInterceptorCount(
-              defense.id,
-              InterceptorCountAction.DEFEND_THREAT
-            );
-          } else if (!coords.tracked) {
-            addThreatsMissed(defense.id, coords.id);
-            coords.tracked = true;
+      if (type === 'attack') {
+        defenses.forEach((defense) => {
+          const distance = point.distanceTo(defense.position);
+          const radiusInWorldUnits = DEFENSE_RADIUS;
+          if (distance < radiusInWorldUnits) {
+            if (type === 'attack' && defense.is_active) {
+              removeProjectile(projectileData.id);
+              removeAggressor(projectileData.src_cty);
+              updateInterceptorCount(
+                defense.id,
+                InterceptorCountAction.DEFEND_THREAT
+              );
+            } else if (type === 'attack' && !projectileData.tracked) {
+              addThreatsMissed(defense.id, projectileData.id);
+              projectileData.tracked = true;
+            }
           }
-        }
-      });
+        });
+      }
     }
   });
 
@@ -83,11 +93,14 @@ const Projectile = ({ coords, startTime }: ProjectileProps) => {
     <>
       <t.line ref={lineRef}>
         <bufferGeometry attach="geometry" {...geometry} />
-        <lineBasicMaterial attach="material" color="red" />
+        <lineBasicMaterial
+          attach="material"
+          color={type === 'attack' ? 'red' : '#7FFF7F'}
+        />
       </t.line>
       <mesh ref={meshRef}>
         <sphereGeometry args={[0.02, 16, 16]} />
-        <meshStandardMaterial color="red" />
+        <meshStandardMaterial color={type === 'attack' ? 'red' : '#7FFF7F'} />
       </mesh>
     </>
   );

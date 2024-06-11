@@ -3,7 +3,7 @@ import { useMapController } from '../../hooks/useMapController';
 import { DefenseProps } from '../../types';
 
 const Defense = ({ defense }: DefenseProps) => {
-  const { setSelectedHangar } = useMapController();
+  const { updateSelectedHangar } = useMapController();
   const { is_active, count, position } = defense;
 
   const color = is_active ? (count > 5 ? '#7FFF7F' : 'orange') : 'red';
@@ -18,7 +18,7 @@ const Defense = ({ defense }: DefenseProps) => {
       onPointerLeave={() => {
         el.style.cursor = 'default';
       }}
-      onClick={() => setSelectedHangar(defense.id)}
+      onClick={() => updateSelectedHangar(defense.id, defense.lat, defense.lon)}
     >
       <sphereGeometry args={[DEFENSE_RADIUS, 32, 32]} />
       <meshStandardMaterial color={color} opacity={0.5} transparent />

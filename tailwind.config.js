@@ -10,7 +10,6 @@ export default {
       },
       colors: {
         retroGreen: '#198719',
-        retroOrange: '#fff',
         orange: colors.orange,
         red: colors.red,
       },

@@ -4,3 +4,4 @@ export const CURVE_MIN_ALTITUDE = 0.44;
 export const CURVE_MAX_ALTITUDE = 0.5;
 export const DEGREE_TO_RADIAN = Math.PI / 180;
 export const CURVE_SEGMENTS = 32;
+export const DEFAULT_ZOOM = 12;
