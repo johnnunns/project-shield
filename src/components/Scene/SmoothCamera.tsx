@@ -9,7 +9,7 @@ const SmoothCamera = () => {
 
   useFrame(({ camera }) => {
     if (autoRotating) {
-      camera.position.lerp(targetPosition as Vector3Like, 0.1);
+      camera.position.lerp(targetPosition as Vector3Like, 0.15);
       camera.zoom = 3.5;
       camera.lookAt(0, 0, 0);
       camera.updateProjectionMatrix();
