@@ -23,7 +23,7 @@ const ManageDefenses = () => {
               onClick={() => updateSelectedHangar(d.id, d.lat, d.lon)}
             >
               {d.name}
-              {d.count < 5 && (
+              {d.count < 10 && (
                 <FontAwesomeIcon
                   className="ml-1.5"
                   icon={faCircleExclamation}
