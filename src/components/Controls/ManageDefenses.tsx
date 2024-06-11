@@ -14,7 +14,7 @@ const ManageDefenses = () => {
             <div
               className={`w-full hover:bg-gray-600 text-left py-2 px-1 ${
                 d.is_active
-                  ? d.count > 5
+                  ? d.count > 10
                     ? 'text-retroGreen'
                     : 'text-orange-400'
                   : 'text-red-500'

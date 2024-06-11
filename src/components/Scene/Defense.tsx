@@ -6,7 +6,7 @@ const Defense = ({ defense }: DefenseProps) => {
   const { updateSelectedHangar } = useMapController();
   const { is_active, count, position } = defense;
 
-  const color = is_active ? (count > 5 ? '#7FFF7F' : 'orange') : 'red';
+  const color = is_active ? (count > 10 ? '#7FFF7F' : 'orange') : 'red';
   const el = document.querySelector('#world-container') as HTMLElement;
 
   return (

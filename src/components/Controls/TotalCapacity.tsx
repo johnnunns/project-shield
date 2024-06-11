@@ -9,7 +9,7 @@ const TotalCapacity = ({ hangarDetails }: TotalCapacityProps) => {
   );
 
   const bgColor = hangarDetails.count
-    ? hangarDetails.count > 5
+    ? hangarDetails.count > 10
       ? 'bg-retroGreen'
       : 'bg-orange-400'
     : 'bg-red-500';
